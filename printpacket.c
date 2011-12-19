@@ -8,8 +8,10 @@
 
 static char *d;
 
-#define X(s) if (!stralloc_cats(out,s)) return 0;
-#define NUM(u) if (!stralloc_catulong0(out,u,0)) return 0;
+/* #define X(s) if (!stralloc_cats(out,s)) return 0;
+#define NUM(u) if (!stralloc_catulong0(out,u,0)) return 0; */
+#define X(s) ((void)0);
+#define NUM(u) ((void)0);
 
 unsigned int printpacket_cat(stralloc *out,char *buf,unsigned int len)
 {
@@ -70,21 +72,21 @@ unsigned int printpacket_cat(stralloc *out,char *buf,unsigned int len)
       uint16_unpack_big(data,&type);
       NUM(type)
       X(" ")
-      if (!dns_domain_todot_cat(out,d)) return 0;
+      /* if (!dns_domain_todot_cat(out,d)) return 0; */
     }
     X("\n")
   }
 
   for (;;) {
     if (numanswers) { --numanswers; X("answer: ") }
-    else if (numauthority) { --numauthority; X("authority: ") }
-    else if (numglue) { --numglue; X("additional: ") }
+    /* else if (numauthority) { --numauthority; X("authority: ") }
+    else if (numglue) { --numglue; X("additional: ") } */
     else break;
 
     pos = printrecord_cat(out,buf,len,pos,0,0);
     if (!pos) return 0;
   }
 
-  if (pos != len) { errno = error_proto; return 0; }
+  /* if (pos != len) { errno = error_proto; return 0; } */
   return 1;
 }

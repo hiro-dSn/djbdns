@@ -49,11 +49,11 @@ int main(int argc,char **argv)
   }
 
   if (!stralloc_copys(&out,"")) oops();
-  uint16_unpack_big(type,&u16);
+  /* uint16_unpack_big(type,&u16);
   if (!stralloc_catulong0(&out,u16,0)) oops();
   if (!stralloc_cats(&out," ")) oops();
   if (!dns_domain_todot_cat(&out,q)) oops();
-  if (!stralloc_cats(&out,":\n")) oops();
+  if (!stralloc_cats(&out,":\n")) oops(); */
 
   if (!response_query(q,type,DNS_C_IN)) oops();
   response[3] &= ~128;
